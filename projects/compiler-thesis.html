@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C&oacute;ndor Compiler | James Scarberry</title>
+  <meta name="description" content="Cóndor: a Spanish-keyword, multimedia programming language and LALR(1) compiler built to help high-school students learn to program. Engineering thesis by James Scarberry, Universidad Técnica del Norte, 2022.">
+  <meta name="author" content="James Scarberry">
+  <meta property="og:title" content="Cóndor Compiler | James Scarberry">
+  <meta property="og:description" content="A Spanish-keyword teaching language with a single-pass LALR(1) compiler that recovers from errors and compiles to C#.">
+  <meta property="og:type" content="article">
+  <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f54d6'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='white'%3EJS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="../index.html" aria-label="James Scarberry, home">
+        <span class="brand-mark">JS</span>
+        <span class="brand-name">James Scarberry</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects" aria-current="page">Projects</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#education">Education</a>
+        <a href="../index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Project header -->
+    <section class="page-hero">
+      <div class="container">
+        <a class="crumb" href="../index.html#projects">&larr; All projects</a>
+        <p class="kicker">Engineering thesis &middot; Universidad T&eacute;cnica del Norte &middot; 2022</p>
+        <h1>C&oacute;ndor Compiler</h1>
+        <p class="lede">An original programming language with Spanish keywords and built-in sound and graphics, plus the compiler and editor to go with it, built to make a first programming course easier for high-school students in Ecuador.</p>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Language designer and sole developer</dd></div>
+          <div><dt>Degree</dt><dd>Engineer of Computer Systems, graduated valedictorian</dd></div>
+          <div><dt>Built with</dt><dd>C#, .NET Framework, XNA, Azure SQL</dd></div>
+          <div><dt>Tested by</dt><dd>42 users, 3,854 real compilations</dd></div>
+        </dl>
+        <a class="btn btn-ghost hero-doc" href="https://repositorio.utn.edu.ec/server/api/core/bitstreams/ff10178b-f3a1-4741-ac5f-870bd9196c25/content" target="_blank" rel="noopener">Read the full thesis (PDF, Spanish) <span aria-hidden="true">&nearr;</span></a>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="section section-tight" id="overview">
+      <div class="container two-col">
+        <div class="section-head">
+          <p class="kicker">Overview</p>
+          <h2>Why a new language?</h2>
+        </div>
+        <div class="prose">
+          <p>Programming courses at my university's engineering faculty had high failure and repeat rates, and many students dropped out of the computer systems and software engineering programs, even those who arrived with a technical high-school diploma in computing. The programs also had far fewer women than men.</p>
+          <p>Almost every mainstream language uses English keywords, which adds a language barrier on top of the logic for students who don't speak English. Cóndor removes that barrier. Its keywords are in Spanish, identifiers can use accented letters and <em>&ntilde;</em>, and programs can play sounds and draw graphics to keep beginners interested, which research suggests also helps close the gender gap.</p>
+          <p>The thesis is titled <em>Desarrollo de un compilador de un lenguaje de programaci&oacute;n original para facilitar el proceso de aprendizaje de programaci&oacute;n en estudiantes de bachillerato</em> and was supervised by MSc. Fernando Garrido.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The language -->
+    <section class="section section-alt section-tight" id="language">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">The language</p>
+          <h2>Familiar structure, native words</h2>
+          <p class="section-sub">Cóndor follows C#-style structure so students can move on to a mainstream language later. Source files use the <code>.sms</code> (Spanish Multimedia Source) extension.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="kw-table-wrap">
+            <table class="kw-table">
+              <caption>A sample of Cóndor keywords and what they compile to</caption>
+              <thead><tr><th scope="col">C&oacute;ndor</th><th scope="col">C#</th></tr></thead>
+              <tbody>
+                <tr><td>entero &middot; decimal &middot; texto</td><td>int &middot; double &middot; string</td></tr>
+                <tr><td>car&aacute;cter &middot; l&oacute;gico</td><td>char &middot; bool</td></tr>
+                <tr><td>si &middot; sinosi &middot; sino</td><td>if &middot; else if &middot; else</td></tr>
+                <tr><td>selecci&oacute;n &middot; caso &middot; predeterminado</td><td>switch &middot; case &middot; default</td></tr>
+                <tr><td>mientras &middot; hacer &middot; para</td><td>while &middot; do &middot; for</td></tr>
+                <tr><td>retornar &middot; salir &middot; nada</td><td>return &middot; break &middot; void</td></tr>
+                <tr><td>intentar &middot; error</td><td>try &middot; catch</td></tr>
+                <tr><td>a ^ b</td><td>Math.Pow(a, b)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <article class="card">
+            <h3>Multimedia built in</h3>
+            <ul class="plain-list">
+              <li><strong>Sound:</strong> <code>reproducir</code> plays a .wav file and <code>sonido</code> plays a tone at any frequency and duration.</li>
+              <li><strong>Graphics:</strong> a <code>dibujar</code> block opens an XNA window, with <code>textura</code> and <code>color</code> types and <code>dibujarras</code> to draw images.</li>
+              <li><strong>Everyday helpers:</strong> console input and output, math functions, random numbers, file reading and writing, and type conversion.</li>
+              <li><strong>Deliberately small:</strong> lambda and bitwise operators were left out to keep it introductory.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compiler -->
+    <section class="section section-tight" id="compiler">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">The compiler</p>
+          <h2>A single-pass compiler, built by hand in C#</h2>
+          <p class="section-sub">The parser drives the whole pipeline: it pulls tokens from the lexer and calls semantic routines as each grammar rule is recognized, so errors are found quickly in one pass.</p>
+        </div>
+
+        <ol class="pipeline" aria-label="Compilation pipeline">
+          <li><span class="pipeline-num">1</span><strong>Lexer</strong><span>Table-driven finite automaton returns tokens on demand</span></li>
+          <li><span class="pipeline-num">2</span><strong>LALR(1) parser</strong><span>Bottom-up parser over 107 grammar rules</span></li>
+          <li><span class="pipeline-num">3</span><strong>Semantic analysis</strong><span>Type checks and the symbol table, emitting C# as it goes</span></li>
+          <li><span class="pipeline-num">4</span><strong>C# compile</strong><span>Writes a .cs file and invokes Microsoft's C# compiler</span></li>
+          <li><span class="pipeline-num">5</span><strong>Run</strong><span>The new .exe launches immediately</span></li>
+        </ol>
+
+        <div class="detail-grid">
+          <div>
+            <h3>A lexer shrunk by 85%</h3>
+            <p>The first deterministic finite automaton had 36 states and 104 inputs, or 3,744 table cells. Treating keywords as identifiers (looked up afterward), grouping character classes, and removing dead-end states brought it down to 16 states and 544 cells, under 15% of the original size.</p>
+          </div>
+          <div>
+            <h3>An LALR(1) parser</h3>
+            <p>I chose LALR(1) for its broad language coverage, speed, and early error detection. The parse table has 234 states, 55 terminals, and 40 non-terminals, and is loaded from data files rather than hard-coded.</p>
+          </div>
+          <div>
+            <h3>Errors that don't stop you</h3>
+            <p>The lexer skips unrecognized characters and keeps going. The parser uses phrase-level recovery: when a fix is obvious, such as a missing colon, it inserts the token, reports the error, and keeps parsing. Only serious errors stop the analysis.</p>
+          </div>
+          <div>
+            <h3>Translation by synthesized attributes</h3>
+            <p>Each grammar rule has a syntax-directed definition that builds C# code bottom-up on a stack, simulating the parse tree without building one. Risky statements are wrapped in try/catch so a runtime error doesn't end the program, and the code is recompiled without the wrapper if that fails.</p>
+          </div>
+        </div>
+
+        <p class="note">Code followed MISRA-C reliability guidelines adapted to C#: no <code>goto</code>, no recursion, braces on every block, a <code>break</code> in every switch case, and background threads for updates and telemetry.</p>
+      </div>
+    </section>
+
+    <!-- IDE -->
+    <section class="section section-alt section-tight" id="editor">
+      <div class="container two-col">
+        <div class="section-head">
+          <p class="kicker">The editor</p>
+          <h2>An IDE made for beginners</h2>
+        </div>
+        <ul class="check-list">
+          <li>Syntax highlighting by token type, with unrecognized text underlined in red.</li>
+          <li>Live error checking three seconds after you stop typing, with an error table showing the line, error type (lexical, syntactic, or semantic), and description.</li>
+          <li>Keyword autocomplete and right-click templates for every loop and control structure.</li>
+          <li>A trace mode that records each variable's values during a run, like a desk check.</li>
+          <li>Built-in manuals, worked exercises, and example programs students can remix.</li>
+          <li>Silent auto-updates: the app checks an XML version manifest, downloads the new build, verifies its MD5 hash, and restarts.</li>
+          <li>Compile telemetry (source code and errors) sent to an Azure SQL database, which later powered the evaluation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section section-tight" id="results">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">Results</p>
+          <h2>Evaluated against ISO/IEC 25010</h2>
+          <p class="section-sub">I measured performance efficiency and functional suitability, logged real student compilations, and surveyed 40 users. Most were high-school computing students, and 45% had never programmed before.</p>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-num">92.5%</span>
+            <span class="metric-title">Would recommend it to beginners</span>
+            <span class="metric-note">40 survey respondents</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">95%</span>
+            <span class="metric-title">Say multimedia boosts interest</span>
+            <span class="metric-note">No negative answers on enjoying the multimedia features</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">93%</span>
+            <span class="metric-title">Found the syntax easier</span>
+            <span class="metric-note">Compared with other languages, among experienced programmers</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">3,854</span>
+            <span class="metric-title">Real compilations logged</span>
+            <span class="metric-note">From 42 users; 54% had zero errors and 86% had at most one</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">&lt; 1 s</span>
+            <span class="metric-title">Compile and launch</span>
+            <span class="metric-note">904 ms on a modern PC, 1.6 s on a dual-core Pentium</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">53 MB</span>
+            <span class="metric-title">Peak memory</span>
+            <span class="metric-note">29 MB on average, so it runs on low-end lab computers</span>
+          </div>
+        </div>
+
+        <div class="feature-grid results-pair">
+          <article class="card">
+            <h3>What the data showed</h3>
+            <ul class="plain-list">
+              <li>82.5% said Cóndor could be used as a first programming language in schools, and 80.6% of first-time programmers said it would encourage them to keep studying programming.</li>
+              <li>About 90% of logged errors were syntactic, which points to better error messages as the biggest opportunity.</li>
+              <li>Overall scores: 79.8% functional completeness, 88.3% functional correctness, and 84.8% functional appropriateness.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>What I'd do next</h3>
+            <ul class="plain-list">
+              <li>Run a controlled study comparing a class taught in Cóndor with one taught in Python, C#, or Java.</li>
+              <li>Open-source it so others can translate the keywords into more languages; the compiler needs few changes to support another language.</li>
+              <li>Port it to a cross-platform runtime so schools can use free operating systems such as Linux.</li>
+            </ul>
+          </article>
+        </div>
+
+        <ul class="chips chips-spaced" aria-label="Topics">
+          <li>Compiler design</li><li>Finite automata</li><li>LALR(1) parsing</li><li>Syntax-directed translation</li><li>Error recovery</li><li>C#</li><li>XNA</li><li>Azure SQL</li><li>ISO/IEC 25010</li><li>CS education</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Next project -->
+    <nav class="pager" aria-label="More projects">
+      <div class="container pager-inner">
+        <a class="pager-link" href="amigo-alert.html"><span>&larr; Previous project</span><strong>Amigo Alert</strong></a>
+        <a class="pager-link pager-next" href="../index.html#projects"><span>Back &rarr;</span><strong>All projects</strong></a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>&copy; 2026 James Scarberry</p>
+      <p><a href="mailto:jamesscarberry@my.uopeople.edu">jamesscarberry@my.uopeople.edu</a></p>
+    </div>
+  </footer>
+</body>
+</html>

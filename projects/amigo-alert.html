@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amigo Alert | James Scarberry</title>
+  <meta name="description" content="Amigo Alert: an Android app and Azure back end that check in on older adults twice a day and text an emergency contact when they don't respond. M.S. IT capstone by James Scarberry.">
+  <meta name="author" content="James Scarberry">
+  <meta property="og:title" content="Amigo Alert | James Scarberry">
+  <meta property="og:description" content="A low-cost check-in safety system for older adults who live alone, built with .NET MAUI and Azure.">
+  <meta property="og:type" content="article">
+  <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f54d6'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='28' fill='white'%3EJS%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-row">
+      <a class="brand" href="../index.html" aria-label="James Scarberry, home">
+        <span class="brand-mark">JS</span>
+        <span class="brand-name">James Scarberry</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects" aria-current="page">Projects</a>
+        <a href="../index.html#experience">Experience</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#education">Education</a>
+        <a href="../index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Project header -->
+    <section class="page-hero">
+      <div class="container">
+        <a class="crumb" href="../index.html#projects">&larr; All projects</a>
+        <p class="kicker">M.S. IT Capstone &middot; University of the People &middot; 2026</p>
+        <h1>Amigo Alert</h1>
+        <p class="lede">An Android app and Azure back end that check in on older adults twice a day and send a text message to an emergency contact when they don't answer.</p>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Sole developer: requirements, design, build, testing, documentation</dd></div>
+          <div><dt>Timeline</dt><dd>8-week capstone term</dd></div>
+          <div><dt>Platform</dt><dd>Android (.NET MAUI) + Microsoft Azure</dd></div>
+          <div><dt>Status</dt><dd><span class="status-dot" aria-hidden="true"></span>Working prototype</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="section section-tight" id="overview">
+      <div class="container two-col">
+        <div class="section-head">
+          <p class="kicker">Overview</p>
+          <h2>Why I built it</h2>
+        </div>
+        <div class="prose">
+          <p>Between <strong>21% and 43%</strong> of older adults in the United States live alone, and about <strong>26.5%</strong> of older adults fall each year. Someone who falls, has a stroke, or has a heart attack while alone may be unable to call for help, and every hour without treatment raises the risk of permanent injury or death.</p>
+          <p>The idea came from close to home. In Cotacachi, Ecuador, an expatriate group once paired retirees to check on each other every day, but that group has since disbanded. A friend of my family later fell, had a stroke, and lay on the floor for about thirty hours before anyone found her. She was left with permanent injuries.</p>
+          <p>The research mostly points to wearables, thermal sensors, and machine-learning fall detectors. These work well, but they need specialized hardware, cost money many retirees don't have, and come off in the shower, which is exactly where many falls happen. I wanted to see how far a phone the person already owns could go instead.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Approach -->
+    <section class="section section-alt section-tight" id="approach">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">Approach</p>
+          <h2>Detect silence, not a specific event</h2>
+          <p class="section-sub">Instead of trying to recognize a fall, Amigo Alert notices when a person stops answering. That covers falls, strokes, heart attacks, and loss of consciousness alike.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card">
+            <h3>Escalation runs on the server</h3>
+            <p>The phone can't be trusted to raise the alarm, because a dead battery or lost signal would silence it. The database and the scheduled escalation logic live in Azure, so a device that goes quiet <strong>triggers</strong> an alert instead of suppressing one.</p>
+          </article>
+          <article class="card">
+            <h3>Consent before any alert</h3>
+            <p>Emergency contacts receive a tokenized link to a consent page and must opt in before the system will ever text them. This satisfies Ecuador's Organic Law on the Protection of Personal Data (LOPDP). None of the reviewed research included a consent step for alert recipients.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-head">How escalation works</h3>
+        <ol class="flow" aria-label="Check-in escalation sequence">
+          <li class="flow-step">
+            <span class="flow-time">8:00 a.m. &amp; 6:00 p.m.</span>
+            <span class="flow-state state-pending">Pending</span>
+            <p>Push notification asks the user to check in.</p>
+          </li>
+          <li class="flow-step">
+            <span class="flow-time">+10 min, no reply</span>
+            <span class="flow-state state-second">Second pending</span>
+            <p>A reminder notification is sent.</p>
+          </li>
+          <li class="flow-step">
+            <span class="flow-time">+20 min, no reply</span>
+            <span class="flow-state state-emergency">Emergency</span>
+            <p>An SMS with the user's location goes to the consented emergency contact.</p>
+          </li>
+          <li class="flow-step flow-reset">
+            <span class="flow-time">Any time</span>
+            <span class="flow-state state-okay">Okay</span>
+            <p>&ldquo;I'm okay&rdquo; or &ldquo;Cancel emergency&rdquo; resets the status. The emergency button alerts the contact immediately.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="section section-tight" id="architecture">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">Architecture</p>
+          <h2>Nine projects, clear boundaries</h2>
+          <p class="section-sub">The solution is split into API, Data, Services, Shared, Web, WebJob, Tests, and the mobile app with its Android-specific project. The phone never touches the database directly; everything goes through the API.</p>
+        </div>
+
+        <div class="arch" role="group" aria-label="System architecture">
+          <div class="arch-col">
+            <span class="arch-label">On the phone</span>
+            <div class="arch-box arch-client"><strong>.NET MAUI Android app</strong><span>XAML + C#, large targets, high contrast</span></div>
+          </div>
+          <div class="arch-col arch-cloud">
+            <span class="arch-label">Microsoft Azure</span>
+            <div class="arch-box"><strong>ASP.NET Web API</strong><span>Users, check-ins, devices, contacts</span></div>
+            <div class="arch-box"><strong>WebJob, every minute</strong><span>Evaluates escalation rules, purges 90-day-old location data</span></div>
+            <div class="arch-box"><strong>Blazor consent page</strong><span>Static SSR, tokenized links</span></div>
+            <div class="arch-box"><strong>Azure SQL + EF Core</strong><span>Code-first, repository pattern</span></div>
+            <div class="arch-box"><strong>Notification Hubs</strong><span>Scheduled check-in pushes</span></div>
+          </div>
+          <div class="arch-col">
+            <span class="arch-label">External services</span>
+            <div class="arch-box arch-ext"><strong>Firebase Cloud Messaging</strong><span>Android push delivery</span></div>
+            <div class="arch-box arch-ext"><strong>Twilio SMS</strong><span>Alerts to emergency contacts</span></div>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div>
+            <h3>Services hold the business logic</h3>
+            <p>Escalation, consent, registration, push, SMS, and cleanup each live in their own service class, with an <code>EscalationRules</code> class deciding when to alert. Services reach the database only through repositories, which keeps queries out of business logic and makes the services easy to test.</p>
+          </div>
+          <div>
+            <h3>A WebJob drives the clock</h3>
+            <p>A console app runs as an Azure WebJob on a six-field NCRONTAB schedule (<code>0 * * * * *</code>). Every minute it walks every active user and decides whether to send a check-in, send a reminder, alert the contact, or do nothing.</p>
+          </div>
+          <div>
+            <h3>Code-first data</h3>
+            <p>The schema was built entirely with Entity Framework Core migrations; no hand-written SQL creates tables. Per-table configurations define indexes, keys, and field lengths.</p>
+          </div>
+          <div>
+            <h3>Disciplined branching</h3>
+            <p>Feature branches merged into <code>development</code> through pull requests, then into <code>main</code> for releases, with hotfix branches cut from <code>main</code>. Planner tracked every task.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section section-alt section-tight" id="results">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">Results</p>
+          <h2>Every accuracy and latency target met</h2>
+          <p class="section-sub">SMS tests used real messages sent in production and confirmed on a physical phone.</p>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-num">20 / 20</span>
+            <span class="metric-title">Missed check-ins escalated</span>
+            <span class="metric-note">Target: 95% or better</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">20 / 20</span>
+            <span class="metric-title">Successful check-ins reset correctly</span>
+            <span class="metric-note">Target: 95% or better</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">0.40 s</span>
+            <span class="metric-title">Average SMS escalation latency</span>
+            <span class="metric-note">Max 1.10 s vs. a 60 s limit</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">2.58 s</span>
+            <span class="metric-title">Median check-in delivery</span>
+            <span class="metric-note">100% delivered within the 120 s target</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">17 / 17</span>
+            <span class="metric-title">Integration tests passing</span>
+            <span class="metric-note">Plus system tests and acceptance testing with two real users</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">9</span>
+            <span class="metric-title">Usability findings, none catastrophic</span>
+            <span class="metric-note">Nielsen heuristic review: 6 minor, 3 major</span>
+          </div>
+        </div>
+
+        <h3 class="sub-head">Designed for older eyes and hands</h3>
+        <ul class="check-list">
+          <li>Works in both portrait and landscape on every screen.</li>
+          <li>Status uses symbols as well as color, so it reads in grayscale and for color-blind users.</li>
+          <li>High-contrast text checked against WCAG contrast ratios.</li>
+          <li>Layouts hold up with the system font size at 200%.</li>
+          <li>Large, well-spaced buttons to prevent accidental taps.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Trade-offs and next steps -->
+    <section class="section section-tight" id="next">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">Reflection</p>
+          <h2>Trade-offs and next steps</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card">
+            <h3>Honest limitations</h3>
+            <ul class="plain-list">
+              <li><strong>Detection delay.</strong> With two check-ins a day, the average wait from an emergency to an alert is about 6.5 hours, and the worst case is 14 hours 20 minutes. Wearables detect events almost immediately; Amigo Alert trades speed for cost, comfort, and coverage.</li>
+              <li><strong>Phone settings matter.</strong> In user testing, battery optimization put the app to sleep and a check-in never arrived. Clear setup instructions are needed.</li>
+              <li><strong>SMS can be missed.</strong> A plain text message may not feel urgent enough to the contact.</li>
+              <li><strong>Consent withdrawal.</strong> Contacts can opt in but can't yet opt out later, which full LOPDP compliance requires.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>What comes next</h3>
+            <ul class="plain-list">
+              <li>A 30-second undo window after the emergency button, so an accidental tap doesn't text anyone.</li>
+              <li>Louder, longer alarm-style reminders with vibration.</li>
+              <li>Adjustable check-in times and more than two check-ins a day.</li>
+              <li>A companion mode for emergency contacts, with alarm-style alerts and in-app consent withdrawal.</li>
+              <li>Using phone motion patterns to trigger an early check-in when the phone hasn't moved for an unusually long time.</li>
+              <li>Moving hosting from about $55/month on Azure PaaS to lower-cost infrastructure.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="feature-foot">
+          <ul class="chips" aria-label="Technologies used">
+            <li>.NET 10</li><li>.NET MAUI</li><li>ASP.NET Web API</li><li>Blazor</li><li>Azure WebJobs</li><li>Azure SQL</li><li>EF Core</li><li>Notification Hubs</li><li>Firebase Cloud Messaging</li><li>Twilio</li><li>GitHub</li>
+          </ul>
+          <p class="status"><span class="status-dot" aria-hidden="true"></span>Amigo Alert is a working prototype, not a certified medical device. The usability findings are being resolved before any public release.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next project -->
+    <nav class="pager" aria-label="More projects">
+      <div class="container pager-inner">
+        <a class="pager-link" href="../index.html#projects"><span>&larr; Back</span><strong>All projects</strong></a>
+        <a class="pager-link pager-next" href="compiler-thesis.html"><span>Next project &rarr;</span><strong>Educational language &amp; compiler</strong></a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>&copy; 2026 James Scarberry</p>
+      <p><a href="mailto:jamesscarberry@my.uopeople.edu">jamesscarberry@my.uopeople.edu</a></p>
+    </div>
+  </footer>
+</body>
+</html>
